@@ -16,11 +16,35 @@ white='\e[39m'
 echo -e "${RED}Welcome to the Explorer Script${White}"
 
 
-read -p "Enter the path of directory you want to search" path
+read -p "Enter the path of directory you want to search:" path
 
-com= ls $path -lh | awk '{print  $9,"("$5")"}'
+com= ls $path -lh | awk 'NR >= 2 {print $9,"("$5")"}'
 
 echo "com"
+
+echo ""
+
+while true;
+do
+
+read -p "Enter a line of text (Press Enter without text to exit):" text
+
+count=$( echo "$text" | wc | awk '{print $3 }')
+
+
+if [ -z "$text" ]
+then
+	echo -e "Exiting the Interactive Explorer, GoodBye!!"
+	break 
+fi	
+
+
+echo -e "Character count:$count"
+
+done
+
+
+
 
 
 
